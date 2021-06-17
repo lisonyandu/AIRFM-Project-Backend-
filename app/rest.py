@@ -21,6 +21,85 @@ def users():
     return resp
 
 
+@app.route("/api/beta")
+@cross_origin()
+def betaTable():
+    conn = mysql.connect()
+
+    cursor = conn.cursor(pymysql.cursors.DictCursor)
+    cursor.execute("Select id,Date,Instrument,`Data Points`, Beta,`p-Value Beta`,`Total Risk`,`Unique Risk`, R2 FROM ba_beta_output where `Index` = 'J200';")
+
+    rows = cursor.fetchall()
+
+    resp = jsonify(rows)
+    resp.status_code = 200
+
+    return resp
+
+@app.route("/api/betaJ203")
+@cross_origin()
+def betaJ203():
+    conn = mysql.connect()
+
+    cursor = conn.cursor(pymysql.cursors.DictCursor)
+    cursor.execute("Select id,Date,Instrument,`Data Points`, Beta,`p-Value Beta`,`Total Risk`,`Unique Risk`, R2 FROM ba_beta_output where `Index` = 'J203';")
+
+    rows = cursor.fetchall()
+
+    resp = jsonify(rows)
+    resp.status_code = 200
+
+    return resp
+
+@app.route("/api/betaJ250")
+@cross_origin()
+def betaJ250():
+    conn = mysql.connect()
+
+    cursor = conn.cursor(pymysql.cursors.DictCursor)
+    cursor.execute("Select id,Date,Instrument,`Data Points`, Beta,`p-Value Beta`,`Total Risk`,`Unique Risk`, R2 FROM ba_beta_output where `Index` = 'J250';")
+
+    rows = cursor.fetchall()
+
+    resp = jsonify(rows)
+    resp.status_code = 200
+
+    return resp
+
+@app.route("/api/betaJ257")
+@cross_origin()
+def betaJ257():
+    conn = mysql.connect()
+
+    cursor = conn.cursor(pymysql.cursors.DictCursor)
+    cursor.execute("Select id,Date,Instrument,`Data Points`, Beta,`p-Value Beta`,`Total Risk`,`Unique Risk`, R2 FROM ba_beta_output where `Index` = 'J257';")
+
+    rows = cursor.fetchall()
+
+    resp = jsonify(rows)
+    resp.status_code = 200
+
+    return resp
+
+
+@app.route("/api/betaJ258")
+@cross_origin()
+def betaJ258():
+    conn = mysql.connect()
+
+    cursor = conn.cursor(pymysql.cursors.DictCursor)
+    cursor.execute("Select id,Date,Instrument,`Data Points`, Beta,`p-Value Beta`,`Total Risk`,`Unique Risk`, R2 FROM ba_beta_output where `Index` = 'J258';")
+
+    rows = cursor.fetchall()
+
+    resp = jsonify(rows)
+    resp.status_code = 200
+
+    return resp
+
+
+
+
 @app.route("/api/top40")
 @cross_origin()
 def getTop40():
