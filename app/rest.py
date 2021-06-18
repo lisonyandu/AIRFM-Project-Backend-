@@ -27,7 +27,7 @@ def betaTable():
     conn = mysql.connect()
 
     cursor = conn.cursor(pymysql.cursors.DictCursor)
-    cursor.execute("Select id,Date,Instrument,`Data Points`, Beta,`p-Value Beta`,`Total Risk`,`Unique Risk`, R2 FROM ba_beta_output where `Index` = 'J200';")
+    cursor.execute("Select id,DATE_FORMAT(Date,'%d/%m/%Y') as Date,Instrument,`Data Points`, Beta,`p-Value Beta`,`Total Risk`,`Unique Risk`, R2 FROM ba_beta_output where `Index` = 'J200';")
 
     rows = cursor.fetchall()
 
@@ -42,7 +42,7 @@ def betaJ203():
     conn = mysql.connect()
 
     cursor = conn.cursor(pymysql.cursors.DictCursor)
-    cursor.execute("Select id,Date,Instrument,`Data Points`, Beta,`p-Value Beta`,`Total Risk`,`Unique Risk`, R2 FROM ba_beta_output where `Index` = 'J203';")
+    cursor.execute("Select id,DATE_FORMAT(Date,'%d/%m/%Y') as Date,Instrument,`Data Points`, Beta,`p-Value Beta`,`Total Risk`,`Unique Risk`, R2 FROM ba_beta_output where `Index` = 'J203';")
 
     rows = cursor.fetchall()
 
@@ -57,7 +57,7 @@ def betaJ250():
     conn = mysql.connect()
 
     cursor = conn.cursor(pymysql.cursors.DictCursor)
-    cursor.execute("Select id,Date,Instrument,`Data Points`, Beta,`p-Value Beta`,`Total Risk`,`Unique Risk`, R2 FROM ba_beta_output where `Index` = 'J250';")
+    cursor.execute("Select id,DATE_FORMAT(Date,'%d/%m/%Y') as Date,Instrument,`Data Points`, Beta,`p-Value Beta`,`Total Risk`,`Unique Risk`, R2 FROM ba_beta_output where `Index` = 'J250';")
 
     rows = cursor.fetchall()
 
@@ -72,7 +72,7 @@ def betaJ257():
     conn = mysql.connect()
 
     cursor = conn.cursor(pymysql.cursors.DictCursor)
-    cursor.execute("Select id,Date,Instrument,`Data Points`, Beta,`p-Value Beta`,`Total Risk`,`Unique Risk`, R2 FROM ba_beta_output where `Index` = 'J257';")
+    cursor.execute("Select id,DATE_FORMAT(Date,'%d/%m/%Y') as Date,Instrument,`Data Points`, Beta,`p-Value Beta`,`Total Risk`,`Unique Risk`, R2 FROM ba_beta_output where `Index` = 'J257';")
 
     rows = cursor.fetchall()
 
@@ -85,10 +85,19 @@ def betaJ257():
 @app.route("/api/betaJ258")
 @cross_origin()
 def betaJ258():
+
+    query_parameters = request.args
+    date = query_parameters.get("date")
+
+    query = "Select id,DATE_FORMAT(Date,'%d/%m/%Y') as Date,Instrument,`Data Points`, Beta,`p-Value Beta`,`Total Risk`,`Unique Risk`, R2 FROM ba_beta_output where `Index` = 'J258';"
+
+    if date:
+        query += "where date='{0}'".format(date)
+
     conn = mysql.connect()
 
     cursor = conn.cursor(pymysql.cursors.DictCursor)
-    cursor.execute("Select id,Date,Instrument,`Data Points`, Beta,`p-Value Beta`,`Total Risk`,`Unique Risk`, R2 FROM ba_beta_output where `Index` = 'J258';")
+    cursor.execute(query)
 
     rows = cursor.fetchall()
 
