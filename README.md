@@ -1,4 +1,4 @@
-# The Backend is built using MySQL and Flask and Rest API 
+# The Backend is built using MySQL and Flask Rest API 
 
 A MySQL and Python Flask rest API run using docker
 
