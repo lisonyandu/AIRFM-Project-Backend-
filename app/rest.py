@@ -81,6 +81,47 @@ def betaJ257():
 
     return resp
 
+@app.route("/api/timeplot1")
+@cross_origin()
+def timeplot1():
+    conn = mysql.connect()
+
+    cursor = conn.cursor(pymysql.cursors.DictCursor)
+    cursor.execute("Select DATE_FORMAT(Date,'%d/%m/%Y') as Date,`R2`as Rate, Beta,`Unique Risk` as Risk FROM ba_beta_output where `Instrument` = 'ACE' AND `Index` = 'J200';")
+    rows = cursor.fetchall()
+    resp = jsonify(rows)
+    resp.status_code = 200
+
+    return resp
+
+
+@app.route("/api/timeplot2")
+@cross_origin()
+def timeplot2():
+    conn = mysql.connect()
+
+    cursor = conn.cursor(pymysql.cursors.DictCursor)
+    cursor.execute("Select DATE_FORMAT(Date,'%d/%m/%Y') as Date, Beta, Instrument FROM ba_beta_output where  `Index` = 'J200';")
+    rows = cursor.fetchall()
+    resp = jsonify(rows)
+    resp.status_code = 200
+
+    return resp
+
+    
+@app.route("/api/timeplot3")
+@cross_origin()
+def timeplot3():
+    conn = mysql.connect()
+
+    cursor = conn.cursor(pymysql.cursors.DictCursor)
+    cursor.execute("Select DATE_FORMAT(Date,'%d/%m/%Y') as Date, `Beta` FROM ba_beta_output where `Instrument` = 'ACG' AND `Index` = 'J200';")
+    rows = cursor.fetchall()
+    resp = jsonify(rows)
+    resp.status_code = 200
+
+    return resp
+
 
 @app.route("/api/betaJ258")
 @cross_origin()
